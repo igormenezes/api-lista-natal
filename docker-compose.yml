@@ -1,0 +1,39 @@
+version: '3'
+services:
+    node:
+        image: node:latest
+        container_name: node
+        restart: always
+        ports:
+            - "3000:3000"
+        command: 
+            - bash 
+            - -c 
+            - | 
+                touch package.json
+                npm init -y
+                npm install
+                npm start
+        volumes:
+            - .:/usr/src/app
+        working_dir: /usr/src/app
+        depends_on:
+            - mysqlserver
+    mysqlserver:
+        image: mysql:5.7
+        container_name: mysqlserver
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_ROOT_PASSWORD=123
+            - MYSQL_DATABASE=development
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        container_name: 'phpmyadmin'
+        environment:
+            PMA_HOST: mysqlserver
+            PMA_PORT: 3306
+        ports:
+            - '8000:80'
+        depends_on:
+            - mysqlserver
