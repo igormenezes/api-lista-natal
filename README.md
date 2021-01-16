@@ -78,3 +78,8 @@
             "Mensagem": "Token expirado ou inválido!"
         }
     </pre>
+ ## Credenciais de acesso a API:
+* `username:` test
+* `password:` test
+
+
