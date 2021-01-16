@@ -5,32 +5,32 @@ const Validation = require('../services/Validation')
 class Christmas {
     static async create(req, res) {
         try {
-            let result = await database.christmas.create(req.body)
+            const result = await database.christmas.create(req.body)
             return res.status(200).json(await Validation.successResponse(result))
         } catch(err) {
-            return res.status(500).json(await Validation.errorResponse(err))
+            return res.status(400).json(await Validation.errorResponse(err))
         }
     }
 
     static async getAll(req, res) {
         try {
-            let results = await database.christmas.findAll()
+            const results = await database.christmas.findAll()
             return res.status(200).json(await Validation.successResponse(results))
         } catch(err) {
-            return res.status(500).json(await Validation.errorResponse(err))
+            return res.status(400).json(await Validation.errorResponse(err))
         }
     }
 
     static async getById(req, res) {
         try {
-            let result = await database.christmas.findOne({ 
+            const result = await database.christmas.findOne({ 
                 where: {
                     id: Number(req.params.id)
                 }
             })
             return res.status(200).json(await Validation.successResponse(result))
         } catch(err) {
-            return res.status(500).json(await Validation.errorResponse(err))
+            return res.status(400).json(await Validation.errorResponse(err))
         }
     }
 
@@ -44,7 +44,7 @@ class Christmas {
                 }
             })
 
-            let result = await database.christmas.findOne({
+            const result = await database.christmas.findOne({
                 where: {
                     id: Number(req.params.id)
                 }
@@ -54,20 +54,20 @@ class Christmas {
             return res.status(200).json(await Validation.successResponse(result))
         } catch(err) {
             await transaction.rollback()
-            return res.status(500).json(await Validation.errorResponse(err))
+            return res.status(400).json(await Validation.errorResponse(err))
         }
     }
 
     static async delete(req, res) {
         try {
-            let result = await database.christmas.destroy({
+            const result = await database.christmas.destroy({
                 where: {
                     id: Number(req.params.id)
                 }
             })
             return res.status(200).json(await Validation.successResponse(result, true))
         } catch(err) {
-            return res.status(500).json(await Validation.errorResponse(err))
+            return res.status(400).json(await Validation.errorResponse(err))
         }        
     }
 }

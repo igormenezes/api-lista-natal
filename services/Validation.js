@@ -1,9 +1,14 @@
 const moment = require('moment')
+const jwt = require('jsonwebtoken')
+const auth = require('../config/auth.json')
 
 class Validation {
-    static async dataVerify(req) {
-
+    static async generateToken(res) {
+        return { 
+            'token': jwt.sign({id: res.id}, auth.secret, {expiresIn: 300})
+        }
     }
+
     static async successResponse(res, defaultMessage) {
         if(defaultMessage) {
             return { 
