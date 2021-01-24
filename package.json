@@ -4,7 +4,6 @@
   "main": "index.js",
   "scripts": {
     "postinstall": "tsc",
-    "build": "tsc && node ./dist/index.js",
     "start": "ts-node-dev ./src/index.ts",
     "pretest": "NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all",
     "test": "NODE_ENV=test jest --detectOpenHandles --forceExit",
