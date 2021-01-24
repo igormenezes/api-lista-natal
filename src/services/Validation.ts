@@ -1,15 +1,16 @@
-const moment = require('moment')
-const jwt = require('jsonwebtoken')
-const auth = require('../config/auth.json')
+import moment from 'moment'
+import jwt from 'jsonwebtoken'
+import auth from '../config/auth.json'
+import { Json } from 'sequelize/types/lib/utils'
 
-class Validation {
-    static async generateToken(res) {
+export class Validation {
+    static async generateToken(res: any): Promise<Object> {
         return { 
             'token': jwt.sign({id: res.id}, auth.secret, {expiresIn: 300})
         }
     }
 
-    static async successResponse(res, defaultMessage) {
+    static async successResponse(res: any, defaultMessage: boolean): Promise<Object> {
         if(defaultMessage) {
             return { 
                 'Mensagem': 'Operação realizada com sucesso.'
@@ -17,9 +18,9 @@ class Validation {
         }
 
         if(typeof res.length !== "undefined") {
-            let response = {}
+            let response = {};
 
-            Object.keys(res).forEach((item) => {
+            Object.keys(res).forEach((item: any) => {
                 response[item] = {
                     'ID': res[item].id,
                     'Título': res[item].title,
@@ -29,7 +30,7 @@ class Validation {
                     'Mensagem': 'Operação realizada com sucesso.'
                 }
             })
-
+            
             return response
         }
 
@@ -43,11 +44,11 @@ class Validation {
         }
     }
 
-    static async errorResponse(res) {
+    static async errorResponse(res: any): Promise<Object> {
         return {
             'Mensagem': "Ocorreu um erro ao realizar a operação, tente novamente mais tarde. Verifique os dados informados na sua requisição."
         }
     }
 }
 
-module.exports = Validation
+export default Validation

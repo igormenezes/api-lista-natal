@@ -1,5 +1,5 @@
-const request = require('supertest')
-const route = require('../config/route')
+import request from 'supertest'
+import route from '../config/route'
 const app = route()
 
 describe('API', () => {

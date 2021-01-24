@@ -1,8 +1,10 @@
-const database = require('../models')
-const Validation = require('../services/Validation')
+import {Request, Response} from 'express'
+import { Json } from 'sequelize/types/lib/utils'
+import database from '../database/models'
+import { Validation } from '../services/Validation'
 
-class Users {
-    static async login(req, res) {
+export class Users {
+    static async login(req: Request, res: Response): Promise<Json> {
         try{
             const result = await database.users.findOne({
                 where: {
@@ -22,5 +24,3 @@ class Users {
         }
     }
 }
-
-module.exports = Users

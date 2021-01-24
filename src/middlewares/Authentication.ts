@@ -1,10 +1,11 @@
-const database = require('../models')
-const passport = require('passport')
-const BearerStrategy = require('passport-http-bearer').Strategy
-const jwt = require('jsonwebtoken')
-const auth = require('../config/auth.json')
+import {Request, Response} from 'express'
+import database from '../database/models'
+import passport from 'passport'
+import BearerStrategy from 'passport-http-bearer'
+import jwt from 'jsonwebtoken'
+import auth from '../config/auth.json'
 
-class Authentication {
+export class Authentication {
     constructor() {
         passport.use(new BearerStrategy(
             async (token, done) => {
@@ -25,8 +26,8 @@ class Authentication {
         ))
     }
 
-    token(req, res, next) {
-        passport.authenticate('bearer', {session:false}, async (err, user, info) => {
+    token(req: Request, res: Response, next: any): any {
+        passport.authenticate('bearer', {session:false}, async (err: any, user: any, info: any) => {
             if(err) {
                 return res.status(401).json({'Mensagem': 'Token expirado ou inválido!'})
             }
@@ -35,6 +36,3 @@ class Authentication {
         })(req, res, next)
     }
 }
-
-module.exports = Authentication
-

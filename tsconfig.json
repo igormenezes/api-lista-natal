@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "target": "ES6",
+        "outDir": "./dist",
+        "noEmitOnError": true,
+        "allowJs": true, 
+        "removeComments": true,
+        "esModuleInterop": true,
+        "module": "CommonJS",
+        "resolveJsonModule": true,
+        "moduleResolution": "node",
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true
+    },
+    "include": ["src/**/*"],
+    "exclude": ["src/tests", "src/jest.config.js"]
+}
